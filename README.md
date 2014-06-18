@@ -1,6 +1,4 @@
 tradewave-client
 ================
 
-.. image:: https://travis-ci.org/tradewave/tradewave-client.svg?branch=master
-    :alt: Build Status
-    :target: https://travis-ci.org/tradewave/tradewave-client
+[![Build Status](https://travis-ci.org/tradewave/tradewave-client.svg?branch=master)](https://travis-ci.org/tradewave/tradewave-client)
