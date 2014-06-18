@@ -1,0 +1,6 @@
+tox
+nose
+coverage
+nosexcover
+flake8
+mccabe
