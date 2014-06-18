@@ -7,8 +7,9 @@ python:
   - "3.4"
   - "pypy"
 install:
-  - pip install tox
+  - pip install tox coveralls
 script: tox
 matrix:
   allow_failures:
     - python: pypy
+after_success: coveralls
