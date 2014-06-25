@@ -1,10 +1,10 @@
-.PHONY: clean venv install analysis test test-install
+.PHONY: clean venv install analysis test test-install cover
 
 venv:
 	virtualenv venv
 
 install: venv
-	. venv/bin/activate; pip install -e .
+	. venv/bin/activate; pip install -r requirements.txt; pip install -e .
 
 test-install:
 	. venv/bin/activate; pip install -r tests/requirements.txt

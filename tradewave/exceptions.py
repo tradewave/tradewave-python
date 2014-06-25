@@ -1,0 +1,2 @@
+class TradewaveError(Exception):
+    pass
