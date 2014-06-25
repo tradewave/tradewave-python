@@ -3,7 +3,7 @@ import json
 from httmock import urlmatch, HTTMock
 import tradewave
 
-from base import BaseTestCase
+from .base import BaseTestCase
 
 
 STRATEGY_DICT = {"public": False,

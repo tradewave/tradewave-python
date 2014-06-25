@@ -1,6 +1,6 @@
 import socket
 
-from base import BaseTestCase
+from .base import BaseTestCase
 
 
 class ClientTestCase(BaseTestCase):
