@@ -1,6 +1,7 @@
 import json
 
 from httmock import urlmatch, HTTMock
+import six
 import tradewave
 
 from .base import BaseTestCase
@@ -25,5 +26,5 @@ class StrategyTestCase(BaseTestCase):
 
             strategy = strategies[0]
             self.assertTrue(isinstance(strategy, tradewave.Strategy))
-            for key, value in STRATEGY_DICT.iteritems():
+            for key, value in six.iteritems(STRATEGY_DICT):
                 self.assertEqual(getattr(strategy, key), value)

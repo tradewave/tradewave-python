@@ -19,7 +19,7 @@ setup(
     zip_safe = False,
     packages=find_packages(),
     include_package_data=True,
-    install_requires=['requests'],
+    install_requires=['six', 'requests'],
     license='MIT',
     keywords='tradewave API',
     url='https://github.com/tradewave/tradewave-client',
