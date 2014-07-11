@@ -11,12 +11,20 @@ except ImportError:
 from tradewave.exceptions import ResponseError, ResponseParsingError
 
 
+def parse_json(data):
+    """Loads JSON data from string"""
+    try:
+        return json.loads(data)
+    except ValueError as e:
+        raise ResponseParsingError(*e.args)
+
+
 def parse_response(response):
     """Analyses and parses JSON response"""
     # TODO: check for mime-type?
     # handle different response status codes
     if response.status_code == 400:
-        data = json.loads(response.content)
+        data = parse_json(response.content)
         error = data.get('error', 'Unknown Error')
         raise ResponseError(error)
     elif response.status_code != requests.codes.ok:
@@ -27,9 +35,6 @@ def parse_response(response):
 
     # parse response into JSON
     if response.content:
-        try:
-            return json.loads(response.content)
-        except ValueError as e:
-            raise ResponseParsingError(*e.args)
+        return parse_json(response.content)
     else:
         return ''
