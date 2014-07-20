@@ -29,9 +29,8 @@ def parse_response(response):
         raise ResponseError(error)
     elif response.status_code != requests.codes.ok:
         raise ResponseError(
-            'Unexpected response status code: {code}, '
-            'reason: {reason}'.format(code=response.status_code,
-                                      reason=response.reason))
+            'Unexpected response status code: {code}, reason: {reason}'
+            .format(code=response.status_code, reason=response.reason))
 
     # parse response into JSON
     if response.content:

@@ -11,3 +11,6 @@ class Strategy(object):
         self.featured = featured
         self.public = public
         self.forked = forked
+
+    def __repr__(self):
+        return self.name

@@ -1,4 +1,5 @@
 import socket
+
 try:
     from urlparse import urljoin
 except ImportError:
@@ -6,13 +7,20 @@ except ImportError:
 
 import requests
 
-from tradewave.endpoints.strategy import Strategy
-from tradewave.libs.general import parse_response
+from .endpoints.strategy import Strategy
+from .libs.general import parse_response
+
+try:
+    version = __import__('pkg_resources') \
+        .get_distribution('tradewave').version
+except:
+    version = 'unknown'
 
 
 API_ENDPOINT = 'https://tradewave.net/api/'
-USERNAME_HEADER = 'X-Tradewave-Username'
-TOKEN_HEADER = 'X-Tradewave-Token'
+USERNAME_HEADER_NAME = 'X-Tradewave-Username'
+TOKEN_HEADER_NAME = 'X-Tradewave-Token'
+USER_AGENT_HEADER_VALUE = 'Tradewave-python/%s' % version
 
 
 class Client(object):
@@ -26,8 +34,9 @@ class Client(object):
 
         # instantiate a session and set default headers
         self.session = requests.Session()
-        self.session.headers.update({USERNAME_HEADER: self.username,
-                                     TOKEN_HEADER: self.token})
+        self.session.headers.update({USERNAME_HEADER_NAME: self.username,
+                                     TOKEN_HEADER_NAME: self.token,
+                                     'User-Agent': USER_AGENT_HEADER_VALUE})
 
     def _request(self, endpoint, method, data=None):
         """Internal method for making HTTP(s) requests"""
@@ -38,6 +47,7 @@ class Client(object):
                                         timeout=self.timeout)
         return parse_response(response)
 
+    # strategies
     def strategies(self):
         endpoint = 'strategies/'
 
@@ -62,10 +72,10 @@ class Client(object):
 
         self._request(endpoint, 'POST')
 
-    def get_strategy(self):
+    def get_strategy(self, id):
         # TODO
         pass
 
-    def fork_strategy(self):
+    def fork_strategy(self, id):
         # TODO
         pass

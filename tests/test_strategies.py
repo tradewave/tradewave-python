@@ -28,3 +28,7 @@ class StrategyTestCase(BaseTestCase):
             self.assertTrue(isinstance(strategy, tradewave.Strategy))
             for key, value in six.iteritems(STRATEGY_DICT):
                 self.assertEqual(getattr(strategy, key), value)
+
+    def test_strategy_repr(self):
+        strategy = tradewave.Strategy("Test strategy")
+        self.assertEqual(str(strategy), "Test strategy")
