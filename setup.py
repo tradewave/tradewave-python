@@ -13,7 +13,7 @@ setup(
     name='tradewave',
     py_modules = ['tradewave'],
     description='Python wrapper for the Tradewave API',
-    version=version,
+    version='0.0.6dev',
     long_description=README,
     author='tradewave',
     zip_safe = False,
