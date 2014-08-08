@@ -7,6 +7,7 @@ except ImportError:
 
 import requests
 
+from .endpoints.backtest import BackTest
 from .endpoints.strategy import Strategy
 from .libs.general import parse_response
 
@@ -54,6 +55,12 @@ class Client(object):
         strategies = self._request(endpoint, 'GET')
         return [Strategy(**strategy) for strategy in strategies]
 
+    def get_strategy(self, strategy_id):
+        endpoint = 'strategies/{id}'.format(id=strategy_id)
+
+        strategy = self._request(endpoint, 'GET')
+        return Strategy(**strategy)
+
     def create_strategy(self, strategy):
         endpoint = 'strategies/'
 
@@ -67,15 +74,21 @@ class Client(object):
         data = strategy.__dict__
         self._request(endpoint, 'POST', data)
 
-    def delete_strategy(self, strategy):
-        endpoint = 'strategies/{id}/delete'.format(id=strategy.id)
+    def delete_strategy(self, strategy_id):
+        endpoint = 'strategies/{id}/delete'.format(id=strategy_id)
 
         self._request(endpoint, 'POST')
 
-    def get_strategy(self, id):
-        # TODO
-        pass
+    # backtests
+    def create_backtest(self, backtest):
+        endpoint = 'backtests/'
 
-    def fork_strategy(self, id):
-        # TODO
-        pass
+        data = backtest.__dict__
+        result = self._request(endpoint, 'POST', data)
+        backtest.__dict__.update(result)
+
+    def last_backtest(self, strategy_id):
+        endpoint = 'strategies/{id}/last_backtest'.format(id=strategy_id)
+
+        backtest = self._request(endpoint, 'GET')
+        return BackTest(**backtest)

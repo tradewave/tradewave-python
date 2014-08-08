@@ -14,3 +14,6 @@ class Strategy(object):
 
     def __repr__(self):
         return self.name
+
+    # TODO: to_json()?
+    # TODO: shortcuts to the client's strategy-related methods
